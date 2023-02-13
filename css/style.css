@@ -1,51 +1,62 @@
 html {
+  background: #000;
+  font-family: 'helvetica neue';
+  text-align: center;
   font-size: 10px;
-  background: url('../img/background.jpg') bottom center;
-  background-size: cover;
 }
 
-body,html {
+body {
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
-
-.keys {
+  font-size: 2rem;
   display: flex;
   flex: 1;
   min-height: 100vh;
   align-items: center;
-  justify-content: center;
 }
 
-.key {
-  border: .4rem solid black;
-  border-radius: .5rem;
-  margin: 1rem;
-  font-size: 1.5rem;
-  padding: 1rem .5rem;
-  transition: all .07s ease;
-  width: 10rem;
-  text-align: center;
-  color: white;
-  background: rgba(0,0,0,0.4);
-  text-shadow: 0 0 .5rem black;
+.clock {
+  width: 30rem;
+  height: 30rem;
+  border: 20px solid white;
+  border-radius: 50%;
+  margin: 50px auto;
+  position: relative;
+  padding: 2rem;
+  box-shadow:
+      0 0 0 4px rgba(0,0,0,0.1),
+      inset 0 0 0 3px #EFEFEF,
+      inset 0 0 10px black,
+      0 0 10px rgba(0,0,0,0.2);
 }
 
-.playing {
-  transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 1rem #ffc600;
+.clock-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-3px);
 }
 
-kbd {
-  display: block;
-  font-size: 4rem;
+.hand {
+  width: 50%;
+  height: 5px;
+  position: absolute;
+  top: 50%;
+  transform-origin: 100%;
+  transform: rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
 }
 
-.sound {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: .1rem;
-  color: #ffc600;
+.hour-hand {
+  background-color: orange;    
+}
+
+.min-hand {
+  background-color: red;
+}
+
+.second-hand {
+  background-color: green;
+  height: 4px;
+  opacity: .3;
 }
