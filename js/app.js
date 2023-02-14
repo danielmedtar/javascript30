@@ -12,6 +12,8 @@ function playSound(e) {
 function removeTransition(e) {
     if(e.propertyName != 'transform') return;
     this.classList.remove('playing')
+
+    console.log(e);
 }
 
 const keys = document.querySelectorAll('.key')
