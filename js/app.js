@@ -1,23 +1,18 @@
-function playSound(e) {
-    const audio = document.querySelector(`audio[data-key="${e.code}"]`);
-    const key = document.querySelector(`.key[data-key="${e.code}"]`);
-    
-    if(!audio) return;
-    
-    audio.currentTime = 0;
-    audio.play()
-    key.classList.add('playing')
+const panels = document.querySelectorAll('.panel')
+
+panels.forEach(panel => {
+    panel.addEventListener('click', toggleOpen);
+    panel.addEventListener('transitionend', toggleActive);
+});
+
+function toggleOpen() {
+    this.classList.toggle('open')
 }
 
-function removeTransition(e) {
-    if(e.propertyName != 'transform') return;
-    this.classList.remove('playing')
+ function toggleActive(e) {
+    console.log(e.propertyName);
 
-    console.log(e);
+    if(e.propertyName.includes('flex')) {
+        this.classList.toggle('open-active')
+    }
 }
-
-const keys = document.querySelectorAll('.key')
-
-keys.forEach(key => key.addEventListener('transitionend', removeTransition))
-
-window.addEventListener('keydown', playSound)
