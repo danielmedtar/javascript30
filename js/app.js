@@ -1,41 +1,70 @@
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+ // ## Array Cardio Day 2
 
-const ciudades = []
+ const people = [
+    { name: 'Wes', year: 1988 },
+    { name: 'Kait', year: 1986 },
+    { name: 'Irv', year: 1970 },
+    { name: 'Lux', year: 2015 }
+  ];
 
-fetch(endpoint)
-    .then(blob => blob.json())
-    .then(data => ciudades.push(...data))
+  const comments = [
+    { text: 'Love this!', id: 523423 },
+    { text: 'Super good', id: 823423 },
+    { text: 'You are the best', id: 2039842 },
+    { text: 'Ramen is my fav food ever', id: 123523 },
+    { text: 'Nice Nice Nice!', id: 542328 }
+  ];
 
-function encuentraIguales(palabraIgual, ciudades) {
-    return ciudades.filter(lugar => {
-        const regex = new RegExp(palabraIgual, 'gi')
-        return lugar.city.match(regex) || lugar.state.match(regex)
-    })
-}
+  //? Some and Every Checks
+  //ToDo Array.prototype.some() // is at least one person 19 or older?
+  //*Forma Larga
+//   const adulto = people.some(function(persona) {
+//     const currentYear = new Date().getFullYear()
+//     if(currentYear - persona.year >= 19) {
+//         return true
+//     }
+//   })
 
-function puntoNumeros(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  }
+  //*Forma Corta
+//   const adulto = people.some(persona => ((new Date()).getFullYear()) - persona.year >= 19)
+//   console.log(adulto);
 
-function mostrarIguales() {
-    const arrayIguales = encuentraIguales(this.value, ciudades)
-    const html = arrayIguales.map(lugar => {
-        const regex = new RegExp(this.value, 'gi')
+  //ToDo Array.prototype.every() // is everyone 19 or older?
+//   const todosMayores = people.every(persona => ((new Date()).getFullYear()) - persona.year >= 19)
 
-        const nombreCiudad = lugar.city.replace(regex, `<span class="hl">${this.value}</span>`)
-        const nombreEstado = lugar.state.replace(regex, `<span class="hl">${this.value}</span>`)
-        return `
-        <li>
-            <span className="name">${nombreCiudad}, ${nombreEstado}</span>
-            <span className="population">${puntoNumeros(lugar.population)}</span>
-        </li>
-    `
-    }).join('')
-    sugerencias.innerHTML = html
-}
+//   console.log({todosMayores});
 
-const searchInput = document.querySelector('.search')
-const sugerencias = document.querySelector('.suggestions')
 
-searchInput.addEventListener('change', mostrarIguales)
-searchInput.addEventListener('keyup', mostrarIguales)
+  //? Array.prototype.find()
+  // Find is like filter, but instead returns just the one you are looking for
+  //ToDo Encuentra el comentario con el ID 823423
+    //*Forma larga
+//   const comment = comments.find(function(comment) {
+//     if(comment.id === 823423) {
+//         return true
+//     }
+//   })
+
+    //*Forma corta
+//     const comment = comments.find(comment => comment.id === 823423)
+//   console.log(comment);
+
+  // Array.prototype.findIndex()
+  // Find the comment with this ID
+  // delete the comment with the ID of 823423
+
+  const index = comments.findIndex(comment => comment.id === 823423)
+
+// Sacando el comentario del array original:
+// comments.splice(index, 1)
+console.table(comments);
+
+// Creando un nuevo array con la info editada
+
+const newComments = [
+    ...comments.slice(0, index),
+    ...comments.slice(index + 1)
+]
+  console.table(newComments);
+
+  
